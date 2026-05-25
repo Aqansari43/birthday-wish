@@ -257,7 +257,7 @@ button{
 
     <div class="heart">❤️</div>
 
-    <button onclick="popup()">Click for Surprise 🎁</button>
+    <button onclick="popup(); startMusic()">Click for Surprise 🎁</button>
 
   </div>
 </div>
@@ -382,6 +382,16 @@ function startExperience(){
     c.style.background=`hsl(${Math.random()*360},100%,60%)`;
     document.body.appendChild(c);
   }
+}
+
+	function startMusic(){
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.6;
+  music.playbackRate = 1.25;
+
+  music.play().catch(err => {
+    console.log("Autoplay blocked:", err);
+  });
 }
 
 // run on load
