@@ -494,25 +494,58 @@ audio{
     // Surprise Popup
     function showMessage(){
 
-      vibratePhone();
+  vibratePhone();
 
-      const popup = document.createElement("div");
-      popup.classList.add("heart-popup");
+  const popup = document.createElement("div");
+  popup.classList.add("heart-popup");
 
-      popup.innerHTML = `
-        <div class="popup-content">
-          <div class="big-heart">❤️</div>
-          <h2>I Love You 💕</h2>
-          <p>You are the best thing that ever happened to me ✨</p>
-        </div>
-      `;
+  popup.innerHTML = `
+    <div class="popup-content" id="box">
+      <div class="big-heart">❤️</div>
+      <h2>I Love You 💕</h2>
+      <p>You are the best thing that ever happened to me ✨</p>
+    </div>
+  `;
 
-      document.body.appendChild(popup);
+  document.body.appendChild(popup);
 
-      setTimeout(() => {
-        popup.remove();
-      }, 7000);
-    }
+  const box = document.getElementById("box");
+
+  // IMPORTANT: proper mobile centering start
+  box.style.position = "fixed";
+
+  let x = (window.innerWidth - box.offsetWidth) / 2;
+  let y = (window.innerHeight - box.offsetHeight) / 2;
+
+  let dx = 2;
+  let dy = 2;
+
+  box.style.left = x + "px";
+  box.style.top = y + "px";
+
+  let move = setInterval(() => {
+
+    const maxX = window.innerWidth - box.offsetWidth;
+    const maxY = window.innerHeight - box.offsetHeight;
+
+    x += dx;
+    y += dy;
+
+    // bounce on all walls
+    if(x <= 0 || x >= maxX) dx *= -1;
+    if(y <= 0 || y >= maxY) dy *= -1;
+
+    box.style.left = x + "px";
+    box.style.top = y + "px";
+
+  }, 16);
+
+  // STOP after 7.5 seconds
+  setTimeout(() => {
+    clearInterval(move);
+    popup.remove();
+  }, 7500);
+}
 
     // Confetti
     for(let i=0; i<120; i++){
