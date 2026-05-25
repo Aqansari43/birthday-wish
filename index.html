@@ -14,25 +14,28 @@
     }
 
     body{
-      height:100vh;
-      overflow:hidden;
-      background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4,#fbc2eb);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      position:relative;
-    }
+  min-height:100vh;
+  overflow-y:auto;
+  overflow-x:hidden;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4,#fbc2eb);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  padding:40px 20px;
+}
 
     .container{
-      text-align:center;
-      color:white;
-      z-index:2;
-      padding:20px;
-    }
+  text-align:center;
+  color:white;
+  z-index:2;
+  padding:20px;
+  max-width:900px;
+}
 
     h1{
       font-size:4rem;
-      color:black;
+	  color: black;
       animation: glow 2s ease-in-out infinite alternate;
     }
 
@@ -40,8 +43,8 @@
       margin-top:20px;
       font-size:1.4rem;
       max-width:700px;
-      color:black;
       line-height:1.8;
+	  color: black;
     }
 
     .heart{
@@ -156,6 +159,65 @@
         font-size:1rem;
       }
     }
+	
+	/* Heart Popup */
+.heart-popup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+  animation: fadeIn 0.5s ease;
+}
+
+.popup-content{
+  background:white;
+  padding:40px;
+  border-radius:30px;
+  text-align:center;
+  animation: popUp 0.6s ease;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.big-heart{
+  font-size:5rem;
+  animation: heartbeat 1s infinite;
+}
+
+.popup-content h2{
+  margin-top:10px;
+  color:#ff4081;
+}
+
+.popup-content p{
+  margin-top:10px;
+  color:#444;
+}
+
+@keyframes popUp{
+  0%{
+    transform:scale(0.3);
+    opacity:0;
+  }
+  100%{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+}
 
   </style>
 </head>
@@ -170,7 +232,7 @@
   <div class="balloon b5"></div>
 
   <div class="container">
-    <h1>Happy Birthday My Love 🎂❤️</h1>
+    <h1>Happy Birthday BabyGirl 🎂❤️</h1>
 
     <p>
       On this special day, I just want you to know how much you mean to me.
@@ -178,6 +240,15 @@
       May your birthday be filled with happiness, laughter, love, and all your favorite things.
       You deserve the entire universe and more. 💖
     </p>
+	<br><br>
+	<p>
+	❤️Thank you for making life so much fun and never failing to make me smile. 
+	You are such a wonderful girl✨🍁and I am one lucky man to have a girl like you!💜🤩Not only you are the world's best person, 
+	but you are also the best friend I could have ever asked for. I cannot wait to celebrate more birthdays to come!❤️
+	You will always hold a special place in my heart. 🥰🥰 You are the only person I have ever loved so deeply and passionately. 
+	My life would be meaningless and empty without you. I appreciate you loving me the way I want to be loved🌎 
+	All my love on your birthday and every other day, my sweetheart❤️❤️
+	</p>
 
     <div class="heart">❤️</div>
 
@@ -192,8 +263,26 @@
   <script>
     // Surprise Message
     function showMessage(){
-      alert("You are the best thing that ever happened to me 💕\nHappy Birthday Sweetheart 🎉");
-    }
+
+  // Create popup heart
+  const popup = document.createElement("div");
+  popup.classList.add("heart-popup");
+
+  popup.innerHTML = `
+    <div class="popup-content">
+      <div class="big-heart">❤️</div>
+      <h2>I Love You 💕</h2>
+      <p>You are the best thing that ever happened to me ✨</p>
+    </div>
+  `;
+
+  document.body.appendChild(popup);
+
+  // Remove after animation
+  setTimeout(() => {
+    popup.remove();
+  }, 3000);
+}
 
     // Create Confetti
     for(let i=0; i<120; i++){
