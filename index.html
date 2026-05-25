@@ -219,6 +219,10 @@ button{
 
 <body>
 
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a3b6b7.mp3?filename=romantic-piano-ambient-112191.mp3" type="audio/mp3">
+</audio>
+
 <div id="app"></div>
 <div id="sparkles"></div>
 
@@ -233,7 +237,7 @@ button{
 <div class="screen">
   <div class="card">
 
-    <h1>Happy Birthday BabyGirl🎂❤️</h1>
+    <h1>Happy Birthday 🎂❤️</h1>
 
     <p>
       On this special day, I just want you to know how much you mean to me.
@@ -351,22 +355,35 @@ function popup(){
   window.addEventListener("mouseup", end);
   window.addEventListener("touchend", end);
 
-  setTimeout(()=>overlay.remove(),10000);
+  setTimeout(()=>overlay.remove(),15000);
 }
 
 /* ======================
    CONFETTI GPU
 ====================== */
 
-for(let i=0;i<120;i++){
-  const c=document.createElement("div");
-  c.className="confetti";
-  c.style.left=Math.random()*100+"vw";
-  c.style.setProperty("--x",(Math.random()*20-10)+"vw");
-  c.style.setProperty("--t",(Math.random()*3+2)+"s");
-  c.style.background=`hsl(${Math.random()*360},100%,60%)`;
-  document.body.appendChild(c);
+function startExperience(){
+  // 🎵 START MUSIC EXACTLY WHEN CONFETTI STARTS
+  const music = document.getElementById("bgMusic");
+  music.volume = 0.6;
+  music.play().catch(() => {
+    console.log("Autoplay blocked until interaction");
+  });
+
+  // 🎊 CONFETTI
+  for(let i=0;i<120;i++){
+    const c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.setProperty("--x",(Math.random()*20-10)+"vw");
+    c.style.setProperty("--t",(Math.random()*3+2)+"s");
+    c.style.background=`hsl(${Math.random()*360},100%,60%)`;
+    document.body.appendChild(c);
+  }
 }
+
+// run on load
+window.addEventListener("load", startExperience);
 
 </script>
 
