@@ -220,7 +220,7 @@ button{
 <body>
 
 <audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a3b6b7.mp3?filename=romantic-piano-ambient-112191.mp3" type="audio/mp3">
+  <source src="audio.mp3" type="audio/mp3">
 </audio>
 
 <div id="app"></div>
@@ -363,9 +363,11 @@ function popup(){
 ====================== */
 
 function startExperience(){
-  // 🎵 START MUSIC EXACTLY WHEN CONFETTI STARTS
   const music = document.getElementById("bgMusic");
+
   music.volume = 0.6;
+  music.playbackRate = 1.25; // 👈 1.25x speed
+
   music.play().catch(() => {
     console.log("Autoplay blocked until interaction");
   });
