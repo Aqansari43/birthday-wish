@@ -2,12 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <!-- Mobile Theme -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#ff4081">
 
-  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -22,10 +19,16 @@
   font-family:'Poppins',sans-serif;
 }
 
+html, body {
+  width:100%;
+  height:100%;
+  overflow-x:hidden;
+  overscroll-behavior:none;
+}
+
 body{
   min-height:100vh;
   overflow-y:auto;
-  overflow-x:hidden;
 
   background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
   background-size:400% 400%;
@@ -40,6 +43,8 @@ body{
   padding:20px 14px;
 
   -webkit-tap-highlight-color: transparent;
+
+  touch-action: manipulation;
 }
 
 /* Animated Background */
@@ -49,37 +54,31 @@ body{
   100%{background-position:0% 50%;}
 }
 
-/* Sparkle Overlay */
+/* Sparkle Overlay FIXED */
 body::before{
   content:"";
-  position:absolute;
-  width:200%;
-  height:200%;
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
 
-  background-image:
-    radial-gradient(white 1px, transparent 1px);
-
+  background-image: radial-gradient(white 1px, transparent 1px);
   background-size:50px 50px;
-
   opacity:0.12;
 
   animation:sparkleMove 30s linear infinite;
+  pointer-events:none;
 }
 
 @keyframes sparkleMove{
-  from{
-    transform:translateY(0);
-  }
-  to{
-    transform:translateY(-200px);
-  }
+  from{transform:translateY(0);}
+  to{transform:translateY(-200px);}
 }
 
-/* Main Container */
+/* Container */
 .container{
-  width:100%;
-  max-width:500px;
-
+  width:min(500px, 92vw);
   text-align:center;
   z-index:2;
 
@@ -101,65 +100,40 @@ body::before{
 }
 
 @keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(40px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+  from{opacity:0; transform:translateY(40px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
 /* Heading */
 h1{
   font-size:2.4rem;
   line-height:1.3;
-
   color:#2b0a1f;
-
   font-weight:700;
-
-  text-shadow:
-    0 2px 10px rgba(255,255,255,0.4);
-
   animation: glow 2s ease-in-out infinite alternate;
 }
 
 /* Paragraphs */
 p{
   margin-top:18px;
-
   font-size:1rem;
   line-height:1.9;
-
   color:#3b1028;
-
   font-weight:500;
-
-  text-shadow:
-    0 1px 3px rgba(255,255,255,0.25);
 }
 
 /* Heart */
 .heart{
   color:#ff1744;
-
   font-size:3.2rem;
-
   animation: heartbeat 1s infinite;
-
   margin-top:22px;
-
-  filter:drop-shadow(0 0 15px #ff1744);
 }
 
 /* Button */
 button{
   margin-top:28px;
-
   width:100%;
-
   padding:16px 20px;
 
   border:none;
@@ -168,23 +142,10 @@ button{
   background:linear-gradient(45deg,#ff4081,#ff80ab);
 
   color:white;
-
   font-size:1rem;
   font-weight:600;
 
-  letter-spacing:0.5px;
-
   cursor:pointer;
-
-  transition:0.3s;
-
-  box-shadow:
-    0 10px 25px rgba(255,64,129,0.35),
-    0 0 20px rgba(255,64,129,0.3);
-}
-
-button:active{
-  transform:scale(0.96);
 }
 
 /* Heartbeat */
@@ -196,65 +157,43 @@ button:active{
   100%{transform:scale(1);}
 }
 
-/* Soft Glow */
+/* Glow */
 @keyframes glow{
   from{
-    text-shadow:
-      0 0 5px rgba(255,255,255,0.5),
-      0 0 10px rgba(255,64,129,0.25);
+    text-shadow:0 0 5px rgba(255,255,255,0.5);
   }
-
   to{
-    text-shadow:
-      0 0 10px rgba(255,255,255,0.7),
-      0 0 20px rgba(255,64,129,0.35);
+    text-shadow:0 0 15px rgba(255,64,129,0.35);
   }
 }
 
 /* Balloons */
 .balloon{
   position:absolute;
-
   width:55px;
   height:75px;
-
   border-radius:50%;
-
   opacity:0.75;
-
   animation: float 12s linear infinite;
-
-  filter:blur(0.2px);
-
   z-index:0;
 }
 
 .balloon::before{
   content:"";
-
   position:absolute;
-
   width:14px;
   height:14px;
-
-  background:inherit;
-
   bottom:-6px;
   left:20px;
-
   transform:rotate(45deg);
 }
 
 .balloon::after{
   content:'';
-
   position:absolute;
-
   width:1.5px;
   height:60px;
-
   background:white;
-
   left:50%;
   top:75px;
 }
@@ -266,30 +205,19 @@ button:active{
 .b5{background:#ef476f; left:88%; animation-duration:11s;}
 
 @keyframes float{
-  0%{
-    transform:translateY(120vh) rotate(0deg);
-  }
-  100%{
-    transform:translateY(-160vh) rotate(360deg);
-  }
+  0%{transform:translateY(120vh);}
+  100%{transform:translateY(-160vh);}
 }
 
-/* Confetti */
+/* Confetti FIXED */
 .confetti{
-  position:absolute;
-
+  position:fixed;
   width:10px;
   height:10px;
-
-  background:white;
-
   top:-10px;
-
-  animation: fall linear infinite;
-
   border-radius:3px;
-
-  z-index:1;
+  pointer-events:none;
+  animation: fall linear infinite;
 }
 
 @keyframes fall{
@@ -298,19 +226,13 @@ button:active{
   }
 }
 
-audio{
-  display:none;
-}
-
 /* Popup */
 .heart-popup{
   position:fixed;
   top:0;
   left:0;
-
   width:100%;
   height:100%;
-
   background:rgba(0,0,0,0.45);
 
   display:flex;
@@ -318,10 +240,6 @@ audio{
   align-items:center;
 
   z-index:999;
-
-  animation: fadeIn 0.5s ease;
-
-  backdrop-filter:blur(5px);
 }
 
 .popup-content{
@@ -329,106 +247,35 @@ audio{
   max-width:340px;
 
   background:rgba(255,255,255,0.95);
-
   padding:35px 22px;
-
   border-radius:28px;
-
   text-align:center;
 
   animation: popUp 0.7s ease;
 
-  box-shadow:
-    0 10px 40px rgba(0,0,0,0.3),
-    0 0 30px rgba(255,64,129,0.3);
+  position:relative;
 }
 
 .big-heart{
   font-size:4.5rem;
-
   animation: heartbeat 1s infinite;
-
-  filter:drop-shadow(0 0 15px #ff1744);
-}
-
-.popup-content h2{
-  margin-top:12px;
-  color:#ff4081;
-}
-
-.popup-content p{
-  margin-top:10px;
-  color:#444;
 }
 
 @keyframes popUp{
-  0%{
-    transform:scale(0.3);
-    opacity:0;
-  }
-  100%{
-    transform:scale(1);
-    opacity:1;
-  }
-}
-
-@keyframes fadeIn{
-  from{
-    opacity:0;
-  }
-  to{
-    opacity:1;
-  }
+  0%{transform:scale(0.3); opacity:0;}
+  100%{transform:scale(1); opacity:1;}
 }
 
 /* Mobile */
 @media(max-width:480px){
-
-  h1{
-    font-size:2rem;
-  }
-
-  p{
-    font-size:0.96rem;
-    line-height:1.8;
-  }
-
-  .heart{
-    font-size:2.8rem;
-  }
-
-  button{
-    font-size:0.95rem;
-    padding:15px;
-  }
-
-  .popup-content h2{
-    font-size:1.6rem;
-  }
-
-  .popup-content p{
-    font-size:0.95rem;
-  }
+  h1{font-size:2rem;}
+  p{font-size:0.96rem;}
+  .heart{font-size:2.8rem;}
 }
 
-/* Extra Small Phones */
 @media(max-width:360px){
-
-  h1{
-    font-size:1.7rem;
-  }
-
-  p{
-    font-size:0.9rem;
-  }
-
-  .container{
-    padding:22px 15px;
-  }
-
-  button{
-    padding:14px;
-  }
+  h1{font-size:1.7rem;}
+  p{font-size:0.9rem;}
 }
 
   </style>
@@ -443,30 +290,16 @@ audio{
   <div class="balloon b4"></div>
   <div class="balloon b5"></div>
 
-  <!-- Main Content -->
   <div class="container">
 
     <h1>Happy Birthday BabyGirl 🎂❤️</h1>
 
     <p>
-      On this special day, I just want you to know how much you mean to me.
-      Your smile lights up my world and your love makes every moment magical.
-      May your birthday be filled with happiness, laughter, love, and all your favorite things.
-      You deserve the entire universe and more. 💖
+      On this special day, I just want you to know how much you mean to me...
     </p>
 
-    <br><br>
-
     <p>
-      ❤️Thank you for making life so much fun and never failing to make me smile.
-      You are such a wonderful girl✨🍁and I am one lucky man to have a girl like you!💜🤩
-      Not only you are the world's best person, but you are also the best friend I could have ever asked for.
-      I cannot wait to celebrate more birthdays to come!❤️
-      You will always hold a special place in my heart. 🥰🥰
-      You are the only person I have ever loved so deeply and passionately.
-      My life would be meaningless and empty without you.
-      I appreciate you loving me the way I want to be loved🌎
-      All my love on your birthday and every other day, my sweetheart❤️❤️
+      ❤️Thank you for making life so much fun...
     </p>
 
     <div class="heart">❤️</div>
@@ -477,30 +310,27 @@ audio{
 
   </div>
 
-  <!-- Music -->
   <audio autoplay loop>
     <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
   </audio>
 
   <script>
 
-    // Mobile vibration
-    function vibratePhone(){
-      if(navigator.vibrate){
-        navigator.vibrate(120);
-      }
-    }
+function vibratePhone(){
+  if(navigator.vibrate){
+    navigator.vibrate(120);
+  }
+}
 
-    // Surprise Popup
-    function showMessage(){
+function showMessage(){
 
   vibratePhone();
 
   const popup = document.createElement("div");
-  popup.classList.add("heart-popup");
+  popup.className = "heart-popup";
 
   popup.innerHTML = `
-    <div class="popup-content" id="box">
+    <div class="popup-content">
       <div class="big-heart">❤️</div>
       <h2>I Love You 💕</h2>
       <p>You are the best thing that ever happened to me ✨</p>
@@ -509,62 +339,18 @@ audio{
 
   document.body.appendChild(popup);
 
-  const box = document.getElementById("box");
-
-  // IMPORTANT: proper mobile centering start
-  box.style.position = "fixed";
-
-  let x = (window.innerWidth - box.offsetWidth) / 2;
-  let y = (window.innerHeight - box.offsetHeight) / 2;
-
-  let dx = 2;
-  let dy = 2;
-
-  box.style.left = x + "px";
-  box.style.top = y + "px";
-
-  let move = setInterval(() => {
-
-    const maxX = window.innerWidth - box.offsetWidth;
-    const maxY = window.innerHeight - box.offsetHeight;
-
-    x += dx;
-    y += dy;
-
-    // bounce on all walls
-    if(x <= 0 || x >= maxX) dx *= -1;
-    if(y <= 0 || y >= maxY) dy *= -1;
-
-    box.style.left = x + "px";
-    box.style.top = y + "px";
-
-  }, 16);
-
-  // STOP after 7.5 seconds
-  setTimeout(() => {
-    clearInterval(move);
-    popup.remove();
-  }, 20000);
+  setTimeout(() => popup.remove(), 8000);
 }
 
-    // Confetti
-    for(let i=0; i<120; i++){
-
-      let confetti=document.createElement('div');
-
-      confetti.classList.add('confetti');
-
-      confetti.style.left=Math.random()*100+'vw';
-
-      confetti.style.animationDuration=(Math.random()*3+2)+'s';
-
-      confetti.style.opacity=Math.random();
-
-      confetti.style.background=
-        `hsl(${Math.random()*360},100%,50%)`;
-
-      document.body.appendChild(confetti);
-    }
+// Confetti FIX
+for(let i=0;i<100;i++){
+  let c=document.createElement("div");
+  c.className="confetti";
+  c.style.left=Math.random()*100+"vw";
+  c.style.animationDuration=(Math.random()*3+2)+"s";
+  c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+  document.body.appendChild(c);
+}
 
   </script>
 
