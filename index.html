@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#ff4081">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ff4081">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <title>Happy Birthday ❤️</title>
+<title>Happy Birthday ❤️</title>
 
-  <style>
+<style>
+
+/* ======================
+   BASE
+====================== */
 
 *{
   margin:0;
@@ -19,280 +22,218 @@
   font-family:'Poppins',sans-serif;
 }
 
-html, body {
+html,body{
   width:100%;
-  height:100%;
+  min-height:100%;
   overflow-x:hidden;
-  overscroll-behavior:none;
 }
 
 body{
-  min-height:100vh;
   overflow-y:auto;
+  -webkit-tap-highlight-color: transparent;
+}
 
+/* ======================
+   BACKGROUND APP LAYER
+====================== */
+
+#app{
+  position:fixed;
+  inset:0;
+  z-index:-1;
   background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
   background-size:400% 400%;
-  animation:bgAnimation 15s ease infinite;
+  animation:bg 14s ease infinite;
+}
 
+@keyframes bg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* sparkles GPU */
+#sparkles{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image: radial-gradient(#fff 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity:0.12;
+  animation: drift 25s linear infinite;
+  will-change: transform;
+}
+
+@keyframes drift{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(0,-200px,0)}
+}
+
+/* ======================
+   CONTENT
+====================== */
+
+.screen{
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-
-  position:relative;
-
-  padding:20px 14px;
-
-  -webkit-tap-highlight-color: transparent;
-
-  touch-action: manipulation;
+  padding:24px 14px;
 }
 
-/* Animated Background */
-@keyframes bgAnimation{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
-}
-
-/* Sparkle Overlay FIXED */
-body::before{
-  content:"";
-  position:fixed;
-  width:100%;
-  height:100%;
-  top:0;
-  left:0;
-
-  background-image: radial-gradient(white 1px, transparent 1px);
-  background-size:50px 50px;
-  opacity:0.12;
-
-  animation:sparkleMove 30s linear infinite;
-  pointer-events:none;
-}
-
-@keyframes sparkleMove{
-  from{transform:translateY(0);}
-  to{transform:translateY(-200px);}
-}
-
-/* Container */
-.container{
-  width:min(500px, 92vw);
-  text-align:center;
-  z-index:2;
-
-  padding:28px 20px;
-
+.card{
+  width:min(420px,92vw);
+  padding:26px 18px;
   border-radius:28px;
+  text-align:center;
 
-  backdrop-filter:blur(16px);
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(18px);
 
-  background:rgba(255,255,255,0.28);
-
-  border:1px solid rgba(255,255,255,0.25);
-
-  box-shadow:
-    0 8px 32px rgba(0,0,0,0.18),
-    inset 0 0 15px rgba(255,255,255,0.15);
-
-  animation:fadeUp 1.3s ease;
+  box-shadow:0 20px 60px rgba(0,0,0,0.25);
 }
 
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(40px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* Heading */
 h1{
-  font-size:2.4rem;
-  line-height:1.3;
+  font-size:2rem;
   color:#2b0a1f;
-  font-weight:700;
-  animation: glow 2s ease-in-out infinite alternate;
 }
 
-/* Paragraphs */
 p{
-  margin-top:18px;
-  font-size:1rem;
-  line-height:1.9;
+  margin-top:14px;
+  font-size:0.95rem;
   color:#3b1028;
-  font-weight:500;
+  line-height:1.7;
 }
 
-/* Heart */
 .heart{
-  color:#ff1744;
-  font-size:3.2rem;
-  animation: heartbeat 1s infinite;
-  margin-top:22px;
+  font-size:3rem;
+  margin-top:18px;
+  animation:beat 1s infinite;
 }
 
-/* Button */
-button{
-  margin-top:28px;
-  width:100%;
-  padding:16px 20px;
+@keyframes beat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+}
 
+button{
+  margin-top:22px;
+  width:100%;
+  padding:15px;
   border:none;
   border-radius:50px;
-
   background:linear-gradient(45deg,#ff4081,#ff80ab);
-
-  color:white;
-  font-size:1rem;
+  color:#fff;
   font-weight:600;
-
-  cursor:pointer;
 }
 
-/* Heartbeat */
-@keyframes heartbeat{
-  0%{transform:scale(1);}
-  25%{transform:scale(1.2);}
-  50%{transform:scale(1);}
-  75%{transform:scale(1.2);}
-  100%{transform:scale(1);}
-}
+/* ======================
+   BALLOONS (GPU)
+====================== */
 
-/* Glow */
-@keyframes glow{
-  from{
-    text-shadow:0 0 5px rgba(255,255,255,0.5);
-  }
-  to{
-    text-shadow:0 0 15px rgba(255,64,129,0.35);
-  }
-}
-
-/* Balloons */
 .balloon{
-  position:absolute;
-  width:55px;
-  height:75px;
+  position:fixed;
+  bottom:-120px;
+  width:50px;
+  height:70px;
   border-radius:50%;
-  opacity:0.75;
-  animation: float 12s linear infinite;
-  z-index:0;
+  will-change: transform;
+  animation: float var(--d) linear infinite;
 }
-
-.balloon::before{
-  content:"";
-  position:absolute;
-  width:14px;
-  height:14px;
-  bottom:-6px;
-  left:20px;
-  transform:rotate(45deg);
-}
-
-.balloon::after{
-  content:'';
-  position:absolute;
-  width:1.5px;
-  height:60px;
-  background:white;
-  left:50%;
-  top:75px;
-}
-
-.b1{background:#ff4d6d; left:8%; animation-duration:9s;}
-.b2{background:#ffd166; left:28%; animation-duration:12s;}
-.b3{background:#06d6a0; left:48%; animation-duration:10s;}
-.b4{background:#118ab2; left:68%; animation-duration:13s;}
-.b5{background:#ef476f; left:88%; animation-duration:11s;}
 
 @keyframes float{
-  0%{transform:translateY(120vh);}
-  100%{transform:translateY(-160vh);}
+  from{
+    transform:translate3d(var(--x),120vh,0);
+  }
+  to{
+    transform:translate3d(var(--x),-140vh,0);
+  }
 }
 
-/* Confetti FIXED */
+/* ======================
+   CONFETTI (GPU)
+====================== */
+
 .confetti{
   position:fixed;
-  width:10px;
-  height:10px;
   top:-10px;
-  border-radius:3px;
+  width:8px;
+  height:8px;
+  border-radius:2px;
   pointer-events:none;
-  animation: fall linear infinite;
+
+  will-change: transform;
+  animation: fall var(--t) linear infinite;
 }
 
 @keyframes fall{
   to{
-    transform:translateY(110vh) rotate(720deg);
+    transform:translate3d(var(--x),110vh,0) rotate(720deg);
   }
 }
 
-/* Popup */
-.heart-popup{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.45);
+/* ======================
+   POPUP (DRAG + BOUNCE)
+====================== */
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  z-index:999;
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 999;
 }
 
-.popup-content{
-  width:90%;
-  max-width:340px;
+.popup-box {
+  position: fixed;
+  width: min(320px, 85vw);
+  background: white;
+  border-radius: 26px;
+  padding: 28px 18px;
+  text-align: center;
 
-  background:rgba(255,255,255,0.95);
-  padding:35px 22px;
-  border-radius:28px;
-  text-align:center;
+  will-change: transform;
+  transform: translate3d(0,0,0);
 
-  animation: popUp 0.7s ease;
+  user-select: none;
+  touch-action: none;
 
-  position:relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
 
 .big-heart{
-  font-size:4.5rem;
-  animation: heartbeat 1s infinite;
+  font-size:4rem;
+  animation:beat 1s infinite;
 }
 
-@keyframes popUp{
-  0%{transform:scale(0.3); opacity:0;}
-  100%{transform:scale(1); opacity:1;}
+/* ======================
+   MOBILE
+====================== */
+
+@media(max-width:420px){
+  h1{font-size:1.7rem}
+  p{font-size:0.9rem}
 }
 
-/* Mobile */
-@media(max-width:480px){
-  h1{font-size:2rem;}
-  p{font-size:0.96rem;}
-  .heart{font-size:2.8rem;}
-}
-
-@media(max-width:360px){
-  h1{font-size:1.7rem;}
-  p{font-size:0.9rem;}
-}
-
-  </style>
+</style>
 </head>
 
 <body>
 
-  <!-- Balloons -->
-  <div class="balloon b1"></div>
-  <div class="balloon b2"></div>
-  <div class="balloon b3"></div>
-  <div class="balloon b4"></div>
-  <div class="balloon b5"></div>
+<div id="app"></div>
+<div id="sparkles"></div>
 
-  <div class="container">
+<!-- BALLOONS -->
+<div class="balloon" style="--x:10vw;--d:10s;background:#ff4d6d"></div>
+<div class="balloon" style="--x:30vw;--d:12s;background:#ffd166"></div>
+<div class="balloon" style="--x:50vw;--d:11s;background:#06d6a0"></div>
+<div class="balloon" style="--x:70vw;--d:13s;background:#118ab2"></div>
+<div class="balloon" style="--x:90vw;--d:9s;background:#ef476f"></div>
 
-    <h1>Happy Birthday BabyGirl 🎂❤️</h1>
+<!-- CONTENT -->
+<div class="screen">
+  <div class="card">
+
+    <h1>Happy Birthday 🎂❤️</h1>
 
     <p>
       On this special day, I just want you to know how much you mean to me.
@@ -312,55 +253,122 @@ button{
 
     <div class="heart">❤️</div>
 
-    <button onclick="showMessage()">
-      Click for Surprise 🎁
-    </button>
+    <button onclick="popup()">Click for Surprise 🎁</button>
 
   </div>
+</div>
 
-  <audio autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
-  </audio>
+<script>
 
-  <script>
+/* ======================
+   POPUP (DRAG + BOUNCE)
+====================== */
 
-function vibratePhone(){
-  if(navigator.vibrate){
-    navigator.vibrate(120);
-  }
-}
+function popup(){
 
-function showMessage(){
+  const overlay = document.createElement("div");
+  overlay.className = "popup";
 
-  vibratePhone();
+  const box = document.createElement("div");
+  box.className = "popup-box";
 
-  const popup = document.createElement("div");
-  popup.className = "heart-popup";
-
-  popup.innerHTML = `
-    <div class="popup-content">
-      <div class="big-heart">❤️</div>
-      <h2>I Love You 💕</h2>
-      <p>You are the best thing that ever happened to me ✨</p>
-    </div>
+  box.innerHTML = `
+    <div class="big-heart">❤️</div>
+    <h2>I Love You 💕</h2>
+    <p>You are my favorite person ✨</p>
   `;
 
-  document.body.appendChild(popup);
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
 
-  setTimeout(() => popup.remove(), 8000);
+  // start center
+  let x = window.innerWidth/2 - 160;
+  let y = window.innerHeight/2 - 120;
+
+  let vx = 2.2;
+  let vy = 2.0;
+
+  let dragging = false;
+  let ox = 0, oy = 0;
+
+  function render(){
+    box.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  }
+
+  render();
+
+  // bounce loop (GPU smooth)
+  function animate(){
+    if(!dragging){
+      x += vx;
+      y += vy;
+
+      const maxX = window.innerWidth - box.offsetWidth;
+      const maxY = window.innerHeight - box.offsetHeight;
+
+      if(x<=0 || x>=maxX) vx *= -1;
+      if(y<=0 || y>=maxY) vy *= -1;
+
+      render();
+    }
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  // drag support
+  function start(e){
+    dragging = true;
+    const cx = e.touches ? e.touches[0].clientX : e.clientX;
+    const cy = e.touches ? e.touches[0].clientY : e.clientY;
+
+    ox = cx - x;
+    oy = cy - y;
+  }
+
+  function move(e){
+    if(!dragging) return;
+
+    const cx = e.touches ? e.touches[0].clientX : e.clientX;
+    const cy = e.touches ? e.touches[0].clientY : e.clientY;
+
+    x = cx - ox;
+    y = cy - oy;
+
+    render();
+  }
+
+  function end(){
+    dragging = false;
+  }
+
+  box.addEventListener("mousedown", start);
+  box.addEventListener("touchstart", start);
+
+  window.addEventListener("mousemove", move);
+  window.addEventListener("touchmove", move);
+
+  window.addEventListener("mouseup", end);
+  window.addEventListener("touchend", end);
+
+  setTimeout(()=>overlay.remove(),15000);
 }
 
-// Confetti FIX
-for(let i=0;i<100;i++){
-  let c=document.createElement("div");
+/* ======================
+   CONFETTI GPU
+====================== */
+
+for(let i=0;i<120;i++){
+  const c=document.createElement("div");
   c.className="confetti";
   c.style.left=Math.random()*100+"vw";
-  c.style.animationDuration=(Math.random()*3+2)+"s";
-  c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+  c.style.setProperty("--x",(Math.random()*20-10)+"vw");
+  c.style.setProperty("--t",(Math.random()*3+2)+"s");
+  c.style.background=`hsl(${Math.random()*360},100%,60%)`;
   document.body.appendChild(c);
 }
 
-  </script>
+</script>
 
 </body>
 </html>
